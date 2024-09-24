@@ -1,56 +1,27 @@
+import { useEffect, useState } from 'react';
 import './App.css';
-import restaurant from "./logo.svg"
 
-function Header(props) {
-  console.log(props)
-  return (
-    <header>
-      <h1>{props.name} Kitchen</h1>
-    </header>
-  )
-}
+function App({authorized}) {
+  const [emotion, setEmotion] = useState("happy")
+  const [secondary, setSecondary] = useState("tired")
 
-function Main(props) {
-  return (
-    <section>
-      <p>We serve {props.adjective} food!</p>
-      <iMg src={restaurant} height={200} alt="Restaurant logo"/>
-      <ul style={{ textAlign: "left"}}>
-        {props.dishes.map((dish) => (
-          <li key={dish.id}>{dish.title}</li>
-        ))}
-      </ul>
-    </section>
-  )
-}
 
-function Footer(props) {
-  return (
-    <footer>
-      <p>Copyright {props.year}</p>
-    </footer>
-  )
-}
+  useEffect(() => {
+    console.log(`It's ${emotion} around here`)
+  }, [emotion])
 
-const dishes = [
-"Mac and cheese",
-"Salmon",
-"Burger"
-]
+  useEffect(() => {
+    console.log(`It's ${secondary} around here`)
+  }, [secondary])
 
-const dishObjects = dishes.map((dish, i) => ({id: i, title: dish}))
-console.log(dishObjects)
-
-dishes.map((dish) => console.log(dish))
-
-function App() {
   return (
     <>
-      <Header name="Ronan's"/>
-      <Main adjective="Amazing" dishes={dishObjects}/>
-      <Footer year={new Date().getFullYear()}/>
+      <h1>Current emotion is {emotion} and {secondary}</h1>
+      <button onClick={() => setEmotion("Frustrated")}>Frustrated</button>
+      <button onClick={() => setSecondary("crabby")}>crabby</button>
     </>
-  );
+  )
 }
+
 
 export default App;
